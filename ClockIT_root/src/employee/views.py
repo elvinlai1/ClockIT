@@ -2,26 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Employee
 
-def dashboard(request):
-    employee = Employee.objects.get(user=request.user)
-    # TODO: Display employee's timestamps, work schedule, and other information
-    context = {'employee': employee}
-    return render(request, 'dashboard.html', context)
+from django.contrib.auth.models import User
+from timestamps.models import Timestamp
 
-def employee_timestamps(request):
-    employee = Employee.objects.get(user=request.user)
-    timestamps = employee.timestamp_set.all()
-    # TODO: Implement time window for editing timestamps
-    context = {'timestamps': timestamps}
-    return render(request, 'employee_timestamps.html', context)
+def login_view(request):
+    # Your login view code here
 
-def timeoff_request(request):
-    # TODO: Implement time off request logic
-    return HttpResponse('Submit a time off request')
+    # Create a new timestamp object
+    employee_id = request.user.id
+    current_time = datetime.now()
+    timestamp = Timestamp.objects.create(employee_id=employee_id, timestamp=current_time)
 
-def schedule(request):
-    employee = Employee.objects.get(user=request.user)
-    # TODO: Display employee's work schedule and allow shift change requests
-    context = {'employee': employee}
-    return render(request, 'schedule.html', context)
-
+    return redirect('dashboard')
