@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Edit Timestamp</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="employee">Employee:</label>
+    <select name="employee">
+      {% for employee in employees %}
+        <option value="{{ employee.id }}" {% if timestamp.employee.id == employee.id %}selected{% endif %}>{{ employee.name }}</option>
+      {% endfor %}
+    </select><br>
+    <label for="timestamp">Timestamp:</label>
+    <input type="datetime-local" name="timestamp" value="{{ timestamp.timestamp|date:'Y-m-d\TH:i:s' }}" required><br>
+    <label for="department">Department:</label>
+    <select name="department">
+      {% for department in departments %}
+        <option value="{{ department.id }}" {% if timestamp.department.id == department.id %}selected{% endif %}>{{ department.name }}</option>
+      {% endfor %}
+    </select><br>
+    <input type="submit" value="Save">
+  </form>
+  <form method="post" onsubmit="return confirm('Are you sure you want to delete this timestamp?');">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="delete">
+    <input type="submit" value="Delete">
+  </form>
+{% endblock %}
