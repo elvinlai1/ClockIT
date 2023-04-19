@@ -23,6 +23,9 @@ def user_login(request):
     else:
         return render(request, 'login.html')
 
+def user_logout(request):
+    logout(request)
+    return redirect('login')
 
 def dashboard(request):
     user = request.user

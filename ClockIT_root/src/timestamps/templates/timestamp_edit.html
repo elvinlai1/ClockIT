@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Timestamp{% endblock %}
+
+{% block content %}
+
+<h2>Get Employee</h2>
+<form method="GET" name="edit">
+  {% csrf_token %}
+  <label for="employee">Employee:</label>
+  <label for="employee">Select an employee:</label>
+  <select id="employee" name="employee">
+      {% for employee in employees %}
+      <option value="{{ employee.id }}">{{ employee.first_name }} {{employee.last_name}}</option>
+      {% endfor %}
+  </select>
+  <br>
+  <input type="submit" value="Show timestamps">
+</form>
+
+<br>
+
+<form method="post" action="{% url 'timestamps_new' %}">
+  {% csrf_token %}
+  <label for="employee">Employee:</label>
+  <select name="employee" id="employee">
+    {% for employee in employees %}
+      <option value="{{ employee.id }}">{{ employee.name }}</option>
+    {% endfor %}
+  </select>
+  <label for="timestamp">Timestamp:</label>
+  <input type="datetime-local" name="timestamp" id="timestamp">
+  <input type="submit" value="Create">
+</form>
+
+
+  {% comment %} <h2>Edit Timestamp</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="employee">Employee:</label>
+    <form method="GET">
+      <label for="employee">Select an employee:</label>
+      <select id="employee" name="employee">
+        {% for employee in employees %}
+        <option value="{{ employee.id }}">{{ employee.first_name }} {{employee.last_name}}</option>
+        {% endfor %}
+      </select>
+      <br>
+      <input type="submit" value="Show timestamps">
+    </form>
+    {% if timestamps %}
+      <h2>Timestamps for {{ selected_employee.first_name }} {{ selected_employee.last_name }}</h2>
+      <ul>
+        {% for ts in timestamps %}
+        <li>{{ ts.employee }}</li>
+        <li>{{ ts.timestamp_in }}</li>
+        <li>{{ ts.timestamp_out }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </form>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="employee">Employee:</label>
+    <select name="employee">
+      {% for employee in employees %}
+        <option value="{{ employee.id }}" {% if timestamp.employee.id == employee.id %}selected{% endif %}>{{ employee.first_name }}</option>
+      {% endfor %}
+    </select><br>
+    <label for="timestamp_in">Timestamp In:</label>
+    <input type="datetime-local" name="timestamp_in" value="{{ timestamp.timestamp_in|date:'Y-m-d\TH:i:s' }}" required><br>
+    <label for="timestamp_out">Timestamp Out:</label>
+    <input type="datetime-local" name="timestamp_out" value="{{ timestamp.timestamp_out|date:'Y-m-d\TH:i:s' }}" required><br>
+    <input type="submit" value="Save">
+  </form> {% endcomment %}
+
+{% endblock %}

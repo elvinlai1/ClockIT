@@ -37,3 +37,4 @@ class TimestampsTestCase(TestCase):
         self.assertEqual(len(queryset), 2)
         self.assertEqual(queryset[0], self.timestamp1)
 
+    

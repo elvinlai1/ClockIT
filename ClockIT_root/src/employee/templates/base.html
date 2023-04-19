@@ -1,24 +1,18 @@
-{% if user.is_authenticated %}
 
-
-<!DOCTYPE html>
-<html>
 <head>
   <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
 
+{% if user.is_authenticated %}
+  {% include 'navbar.html' %}
 
-{% block content %}
-{% endblock %}
-
-    <footer>
-        <p>&copy; ClockIT</p>
-    </footer>
-</body>
-</html>
+  {% block content %}
+  {% endblock %}
+  <footer>
+    <p>&copy; ClockIT</p>
+  </footer>
 
 {% else %}
-{% include 'login.html' %}
+  {% include 'login.html' %}
 {% endif %}
 
