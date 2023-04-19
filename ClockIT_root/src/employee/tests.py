@@ -1,12 +1,10 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
-from django.urls import reverse
+from django.urls import reverse, timezone
 from datetime import datetime, timedelta
-from django.utils import timezone
 from .models import Employee, Department
 from timestamps.models import Timestamps
 from timestamps.utils import create_timestamp
-from django.test import RequestFactory
 
 
 # Create your tests here.

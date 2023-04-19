@@ -20,7 +20,6 @@ def timestamp_create(request):
             
     return redirect('/')
 
-
 def timestamp_edit(request, pk):
     timestamp = get_object_or_404(Timestamps, pk=pk)
     if request.method == 'POST':
@@ -32,5 +31,10 @@ def timestamp_edit(request, pk):
         form = TimestampsForm(instance=timestamp)
     return render(request, 'timestamp_edit.html', {'form': form})
 
-def test(request):
-    return render(request, 'timestamp_test.html')
+def timestamp_all(request):
+    timestamps = Timestamps.objects.all()
+    return render(request, 'timestamp_all.html', {'timestamps': timestamps})
+
+def timestamp_detail(request, pk):
+    timestamp = get_object_or_404(Timestamps, pk=pk)
+    return render(request, 'timestamp_detail.html', {'timestamp': timestamp})

@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Success</title>
-</head>
-<body>
-  <h1>Success!</h1>
-  <p>Your form has been submitted successfully.</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>{{current_time}}</h1>
+    <h1>Success!</h1>
+    <p>Your form has been submitted successfully.</p>
+        {% for timestamp in timestamps %}
+            <p>In: {{ timestamp.timestamp_in }} - {{ timestamp.timestamp_out }}</p>
+        {% empty %}
+            <p>No timestamps yet for today.</p>
+        {% endfor %}
+{% endblock %}
+
