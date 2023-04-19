@@ -59,7 +59,7 @@ ROOT_URLCONF = 'ClockIT.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates, employee/templates, timestamps/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +71,10 @@ TEMPLATES = [
         },
     },
 ]
+
+# Add app-specific template directories
+# TEMPLATES[0]['DIRS'].append(BASE_DIR / 'employee' / 'templates')
+# TEMPLATES[0]['DIRS'].append(BASE_DIR / 'timestamps' / 'templates')
 
 WSGI_APPLICATION = 'ClockIT.wsgi.application'
 

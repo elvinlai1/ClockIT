@@ -1,16 +1,40 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import HttpResponse
-from .models import Employee
-
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from timestamps.models import Timestamp
+from .models import Employee
+from timestamps.utils import create_timestamp
 
-def login_view(request):
-    # Your login view code here
 
-    # Create a new timestamp object
-    employee_id = request.user.id
-    current_time = datetime.now()
-    timestamp = Timestamp.objects.create(employee_id=employee_id, timestamp=current_time)
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
 
-    return redirect('dashboard')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            create_timestamp(request)
+            return redirect(reverse('dashboard'))
+        else:
+            
+            return HttpResponse('Invalid login')
+
+    else:
+       
+        return render(request, 'login.html')
+
+
+
+def dashboard(request):
+    # Your dashboard view code here
+    return render(request, 'dashboard.html')
+
+def employee_timestamps(request):
+    # Your employee_timestamps view code here
+    return render(request, 'employee_timestamps.html')
+
+
+def test_page(request):
+    return render(request, 'employee_test.html')

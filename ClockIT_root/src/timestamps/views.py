@@ -4,16 +4,20 @@ from timestamps.models import Timestamps
 from employee.models import Employee
 
 def timestamp_create(request):
-    # Get the currently logged in user
     user = request.user
-
-    # Get the employee associated with the user
     employee = Employee.objects.get(user=user)
+    today = timezone.now().date()
 
-    # Create a new Timestamps object with the current time as timestamp_in
-    Timestamps.objects.create(employee=employee, timestamp_in=timezone.now())
-
-    # Redirect to the homepage
+    # Compare the current date with the timestamp_in date
+    if Timestamps.objects.filter(employee=employee, timestamp_in__date=today).exists():
+        # If the employee already has a timestamp_in, add a timestamp_out
+        timestamp = Timestamps.objects.get(employee=employee, timestamp_in__date=today)
+        timestamp.timestamp_out = timezone.now()
+        timestamp.save()
+    else:
+        # If the employee doesn't have a timestamp_in, create a new timestamp_in
+        Timestamps.objects.create(employee=employee, timestamp_in=timezone.now())
+            
     return redirect('/')
 
 
@@ -26,8 +30,7 @@ def timestamp_edit(request, pk):
             return redirect('timestamp_detail', pk=timestamp.pk)
     else:
         form = TimestampsForm(instance=timestamp)
-    return render(request, 'timestamps/timestamp_edit.html', {'form': form})
+    return render(request, 'timestamp_edit.html', {'form': form})
 
-
-## employee login with GET request to create new timestamp
-
+def test(request):
+    return render(request, 'timestamp_test.html')
