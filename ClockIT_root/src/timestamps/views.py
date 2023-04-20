@@ -42,15 +42,18 @@ def timestamp_edit(request):
     #     employees = Employees.objects.all()
     #     context = {'employees': employees}
     
-    if request.method == 'GET':
-        selected_employee_id = request.GET.get('employee')
-        selected_employee = Employee.objects.get(id=selected_employee_id)
-        timestamps = Timestamps.objects.filter(employee=selected_employee)
+    # if request.method == 'GET':
+    #     selected_employee_id = request.GET.get('employee')
+    #     selected_employee = Employee.objects.get(id=selected_employee_id)
+    #     timestamps = Timestamps.objects.filter(employee=selected_employee)
 
 
-    if request.method == 'POST':
-        # save the form data to the database
-        form = TimestampsForm(request.POST)
+    # if request.method == 'POST':
+    #     # save the form data to the database
+    #     selected_employee_id = request.POST.get('employee')
+    #     selected_employee = Employee.objects.get(id=selected_employee_id)
+    #     timestamps = Timestamps.objects.filter(employee=selected_employee)
+    form = TimestampsForm(request.POST or None)
 
     
 
@@ -58,6 +61,7 @@ def timestamp_edit(request):
         'employees': employees,
         'timestamps': timestamps,
         'selected_employee': selected_employee,
+        'form': form,
     }
 
     return render(request, 'timestamp_edit.html', context)

@@ -20,16 +20,9 @@
 
 <br>
 
-<form method="post" action="{% url 'timestamps_new' %}">
+<form method="post" action="">
   {% csrf_token %}
-  <label for="employee">Employee:</label>
-  <select name="employee" id="employee">
-    {% for employee in employees %}
-      <option value="{{ employee.id }}">{{ employee.name }}</option>
-    {% endfor %}
-  </select>
-  <label for="timestamp">Timestamp:</label>
-  <input type="datetime-local" name="timestamp" id="timestamp">
+  {{ form.as_p }}
   <input type="submit" value="Create">
 </form>
 
