@@ -19,7 +19,10 @@ def user_login(request):
             create_timestamp(request)
             return redirect(reverse('dashboard'))
         else:
-            return HttpResponse('Invalid login')
+            prompt = {
+                'order': 'Username or password is incorrect',
+            }
+            return render(request, 'login.html', prompt)
     else:
         return render(request, 'login.html')
 
