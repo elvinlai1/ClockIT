@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
+from timestamps.views import TimestampDeleteView
 
 urlpatterns = [
-    path('', views.timestamp_create, name='timestamp_create'),
-    path('edit/', views.timestamp_edit, name='timestamp_edit'),
+    path('create/', views.create_timestamp, name='create_timestamp'),
+    path('edit/<int:pk>/', views.edit_timestamp, name='edit_timestamp'),
+    path('delete/<int:pk>/', TimestampDeleteView.as_view(), name='delete_timestamp'),
     path('logout/', views.user_logout, name='logout'),
 ]

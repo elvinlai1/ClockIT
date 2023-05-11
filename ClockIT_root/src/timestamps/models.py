@@ -5,6 +5,7 @@ class Timestamps(models.Model):
     employee = models.ForeignKey('employee.Employee', on_delete=models.CASCADE)
     timestamp_in = models.DateTimeField()
     timestamp_out = models.DateTimeField(null=True, blank=True)
+    duration = models.DurationField(null=True, blank=True)
     is_approved = models.BooleanField(default=False)
 
     def __str__(self):

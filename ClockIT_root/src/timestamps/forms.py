@@ -1,14 +1,12 @@
 from django import forms
-from employee.models import Employee
 from .models import Timestamps
+from django.forms.widgets import DateTimeInput
 
-
-class TimestampsForm(forms.ModelForm):
-    employee = forms.ModelChoiceField(queryset=Employee.objects.all())
-    timestamp_in = forms.DateTimeField()
-    timestamp_out = forms.DateTimeField(required=False)
-    is_approved = forms.BooleanField(required=False)
-
+class TimestampForm(forms.ModelForm):
     class Meta:
         model = Timestamps
         fields = ['employee', 'timestamp_in', 'timestamp_out', 'is_approved']
+        widgets = {
+            'timestamp_in': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'timestamp_out': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }

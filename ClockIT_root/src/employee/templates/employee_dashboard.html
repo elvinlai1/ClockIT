@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <p>Hi {{ user.username }}</p>
+
+    <h2>Timestamps</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Timestamp In</th>
+            <th>Timestamp Out</th>
+            <th>Duration</th>
+            <th></th>
+        </tr>
+        {% for timestamp in timestamps %}
+        <tr>
+            <td>{{timestamp.id}}</td>
+            <td>{{timestamp.timestamp_in}}</td>
+            <td>{{timestamp.timestamp_out}}</td>
+            <td>{{timestamp.duration}}</td>
+            <td>
+                <a href="{% url 'edit_timestamp' pk=timestamp.id %}">Edit</a>
+                <a href="{% url 'delete_timestamp' pk=timestamp.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+            <p>No timestamps yet for today.</p>
+        {% endfor %}
+    </table>
+        
+{% endblock %}
+
+

@@ -2,8 +2,10 @@
     <h1>ClockIT</h1>
     <nav>
         <ul>
-            <li><a href="{% url 'dashboard' %}">Home</a></li>
-            <li><a href="{% url 'timestamp_edit' %}">Edit Timestamps</a></li>
+            {% comment %} Send to appropriate dashboard {% endcomment %}
+            <li><a href="{% url 'employee_dashboard' %}">Home</a></li>
+
+            <li><a href="{% url 'create_timestamp' %}">Create Timestamp</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </nav>

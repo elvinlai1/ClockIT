@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Timestamp{% endblock %}
+
+{% block content %}
+    <h1>Delete Timestamp</h1>
+    <p>Are you sure you want to delete this timestamp?</p>
+    <table> 
+        <tr>
+            <th>Employee</th>
+            <th>ID</th>
+            <th>Timestamp In</th>
+            <th>Timestamp Out</th>
+            <th>Duration</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>{{ user.username }}</th>
+            <th>{{ object.id }}</th>
+            <th>{{ object.timestamp_in }}</th>
+            <th>{{ object.timestamp_out }}</th>
+            <th>{{ object.duration }}</th>
+        </tr>
+    </table>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+      <input type="submit" value="Confirm">
+    </form>
+{% endblock %}
