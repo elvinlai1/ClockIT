@@ -24,7 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('timestamps/', include('timestamps.urls')),
     path('', include('employee.urls')),
-    path('logout/', LogoutView.as_view(), name='logout'),
 
 ]
 

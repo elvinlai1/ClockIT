@@ -9,7 +9,7 @@ from django.views.generic import FormView, CreateView
 from .models import Employee, Department
 from timestamps.models import Timestamps
 from timestamps.utils import create_timestamp
-from .forms import LoginForm, EmployeeSignUpForm
+from .forms import LoginForm, EmployeeSignUpForm, EmployeeProfileForm
 
 # need disection of this class
 # not generating session id
@@ -31,20 +31,6 @@ from .forms import LoginForm, EmployeeSignUpForm
 #             # Redirect regular users to the user dashboard
 #             return reverse_lazy('employee_dashboard')
 
-class EmployeeSignUpView(CreateView):
-    model = User
-    form_class = EmployeeSignUpForm
-    template_name = 'registration/signup_form.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'teacher'
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('teachers:quiz_change_list')
-
 
 def user_login(request):
     # needs to add check for isManager, isEmployee, isSuperuser tags
@@ -65,6 +51,7 @@ def user_login(request):
             create_timestamp(request) 
             return redirect('dashboard/')
         else:
+            print("Error")
             prompt = {
                 'order': 'Username or password is incorrect',
             }
@@ -73,7 +60,7 @@ def user_login(request):
         return render(request, 'login.html')
 
 
-def employee_dashboard(request):
+def dashboard_employee(request):
     user = request.user
     employee = Employee.objects.get(user=user) 
     timestamps = Timestamps.objects.filter(employee=employee)
@@ -82,9 +69,9 @@ def employee_dashboard(request):
         'employee': employee,
         'timestamps': timestamps
     }
-    return render(request, 'employee_dashboard.html', context)
+    return render(request, 'dashboard_employee.html', context)
 
-def manager_dashboard(request):
+def dashboard_manager(request):
     user = request.user
     departments = Department.objects.all()
     employees = Employee.objects.all()
@@ -95,4 +82,38 @@ def manager_dashboard(request):
         'departments': departments,
     }
 
-    return render(request, 'manager_dashboard.html', context)
+    return render(request, 'dashboard_manager.html', context)
+
+def list_employees(request):
+    employees = Employee.objects.all()
+    departments = Department.objects.all()
+    context = {
+        'employees': employees,
+        'departments':departments
+    }
+    return render(request, 'list_employees.html', context)
+
+def profile_employee(request, pk):
+    #get employee pk id from url
+    #get employee object
+    #get timestamps for employee
+    employee = Employee.objects.get(pk=pk)
+    employee_timestamps = Timestamps.objects.filter(employee=employee)
+
+    context = {
+        'employee': employee,
+        'timestamps': employee_timestamps
+    }
+    return render(request, 'profile_employee.html', context)
+
+def create_employee(request):
+    form = EmployeeProfileForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            employee = form.save(commit=False)
+            employee.save()
+            return redirect('dashboard_manager')
+
+    return render(request, 'create_employee.html', {'form': form})
+    
+

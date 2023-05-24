@@ -8,14 +8,18 @@ class LoginForm(AuthenticationForm):
                                widget=forms.TextInput(attrs={'autofocus': True}))
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
 
-
 class EmployeeSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.is_teacher = True
         if commit:
             user.save()
         return user
+
+class EmployeeProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email')
+

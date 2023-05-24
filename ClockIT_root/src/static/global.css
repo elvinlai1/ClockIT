@@ -1,0 +1,179 @@
+/* Global styles */
+
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #DCDCDC;
+}
+
+
+footer {
+  margin: 0 16px;
+}
+
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.container{
+  margin: 16px;
+  padding: 32px 16px;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.column-container{
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+  padding: 32px 16px;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.default-button{
+  background-color: #afafaf;
+  color: rgb(0, 0, 0);
+  padding: 12px 20px;
+  margin: 8px 2px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none!important;
+  font-size: 16px;
+}
+
+
+
+
+
+/* Button */
+
+button:hover{
+  color: rgb(255, 255, 255);
+  background-color: rgb(20, 20, 20);
+}
+
+/* Targeted to forms */
+button {
+  width: 100%;
+}
+
+
+/* Links */
+
+a:hover{
+  color: rgb(255, 255, 255);
+  background-color: rgb(20, 20, 20);
+}
+
+/* Navbar */
+nav {
+  margin: 0 16px
+}
+
+ul {
+  list-style-type: none;
+  overflow: hidden;
+  background-color: black;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 16px;
+}
+
+li a:hover {
+  background-color: white;
+  color: black;
+}
+
+li a:active{
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.end-navbar-item {
+  float: right;
+}
+
+/* Table */
+
+.table-header {
+  padding: 14px 0px;
+  margin: 14px 0px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.table-button { 
+  background-color: #afafaf;
+  margin: 0px 4px;
+  padding: 4px 8px;
+  color: rgb(0, 0, 0);
+  text-decoration: none!important;
+}
+
+
+/* Form */
+
+form {
+  background-color: white;
+  padding: 16px;
+  margin: 16px;
+  width:320px;
+  border: 2px solid #070707;
+}
+
+form label{
+  font-size: 16px;
+  font-weight: bold;
+  margin: 4px 0px;
+  display: block;
+}
+
+input {
+  width: 90%;
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+input[type="checkbox"] {
+  border: none;
+  width: 20px;
+  height: 20px;
+}
+
+select {
+  width: 100%;
+  margin: 12px 0px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}

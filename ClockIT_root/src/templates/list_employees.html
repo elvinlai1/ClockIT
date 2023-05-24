@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}List of Employees{% endblock %}
+
+{% block content %}
+<div class="container"> 
+    <h1>List of Employees</h1>
+    <h2>Department</h2>
+    <table> 
+        <tr> 
+            <th>ID</th>
+            <th>Department</th>
+        </tr>
+        {% for department in departments %}
+        <tr>
+            <td>{{ department.id }}</td>
+            <td>{{ department.name }}</td>
+        </tr>
+        {% empty %}
+            <p>No Department?</p>
+        {% endfor %}
+    </table>
+
+
+    <h2>Employees</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th></th>
+        </tr>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.first_name }}</td>
+            <td>{{ employee.last_name }}</td>
+            <td>{{ employee.department }}</td>
+            <td><a href="{% url 'profile_employee' pk=employee.id %}">View</a></td>
+        </tr>
+        {% empty %}
+            <p>No Employee?</p>
+        {% endfor %}
+    </table>
+
+</div> 
+{% endblock %}

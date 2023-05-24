@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Manager Dashboard</h1>
+        <p>Hi {{ user.username }}!</p>
+</div>
+<div class="container">
+
+    <h2> Manage Employees </h2>
+    <br>
+    <a href="{% url 'create_employee' %}" class="default-button">Create Employee</a></span>
+    <a href="{% url 'list_employees' %}" class="default-button">List of Employees</a>
+</div>
+
+<div class="container">
+
+    <h2> Manage Timestamps </h2>
+    <br>
+    <a href="{% url 'create_timestamp' %}" class="default-button">Create Timestamp</a>
+    <a href="{% url 'list_timestamps' %}" class="default-button">View Timestamps</a>
+    
+</div>
+{% endblock %}
+
+

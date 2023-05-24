@@ -1,0 +1,15 @@
+{% block content %}
+
+<nav>
+    <ul>
+        <li><a href="{% url 'dashboard_employee' %}">Home</a></li>
+        <li><a href="{% url 'dashboard_manager'%}">Manager Dashboard</a></li>
+        <li class="end-navbar-item"><a href="{% url 'logout' %}">Logout</a></li>
+        {% if user.is_authenticated %}
+            <li class="end-navbar-item">
+                <a href="{% url 'profile_employee' pk=user.id  %}">{{ user.username }}</a>
+                <li>
+        {% endif %}
+    </ul>
+</nav>
+{% endblock %}

@@ -3,10 +3,12 @@
 {% block title %}Create Timestamp{% endblock %}
 
 {% block content %}
+<div class="column-container">
   <h1>Create New Timestamp</h1>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Create</button>
+    <button type="submit" class="default-button">Create</button>
   </form>
+</div>
 {% endblock %}

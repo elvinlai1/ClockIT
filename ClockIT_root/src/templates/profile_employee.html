@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Profile{%  endblock %}
 
 {% block content %}
-    <h1>Dashboard</h1>
-    <p>Hi {{ user.username }}</p>
-
+<div class="container">
+    <h1>Profile</h1> 
+    
     <h2>Timestamps</h2>
     <table>
         <tr>
@@ -22,15 +22,17 @@
             <td>{{timestamp.timestamp_out}}</td>
             <td>{{timestamp.duration}}</td>
             <td>
-                <a href="{% url 'edit_timestamp' pk=timestamp.id %}">Edit</a>
-                <a href="{% url 'delete_timestamp' pk=timestamp.id %}">Delete</a>
+                <a href="{% url 'edit_timestamp' pk=timestamp.id %}" class="table-button">Edit</a>
+                <a href="{% url 'delete_timestamp' pk=timestamp.id %}" class="table-button">Delete</a>
             </td>
         </tr>
         {% empty %}
             <p>No timestamps yet for today.</p>
         {% endfor %}
     </table>
-        
+
+</div> 
+
+
+
 {% endblock %}
-
-

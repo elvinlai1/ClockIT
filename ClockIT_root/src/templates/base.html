@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'global.css' %}">
+</head>
+  <body>
+  <div class="wrapper">
+    
+      {% if user.is_authenticated %}
+        {% include 'navbar.html' %}
+
+        {% block content %}
+        {% endblock %}
+
+      {% else %}
+        {% include 'login.html' %}
+      {% endif %}
+        <br>
+        <footer class="footer">
+          <p>&copy; 2023 ClockIT</p>
+        </footer>
+      
+    </div>
+  </body>
+</html>
+

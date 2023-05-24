@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}List of Timestamps{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Dashboard</h1>
+    <p>Hi {{ user.username }}</p>
+</div>
+
+<div class="container">
+    <h2 class="table-header">Timestamps</h2>
+        <table>
+            <tr>
+                <th>Employee Name</th>
+                <th>Timestamp ID</th>
+                <th>Timestamp In</th>
+                <th>Timestamp Out</th>
+                <th>Duration</th>
+                <th></th>
+            </tr>
+            {% for employee in employees %}
+                {% for timestamp in timestamps %}
+                <tr>
+                    <td>{% if timestamp.employee_id == employee.id %}
+                            <a href="{% url 'profile_employee' pk=employee.id %}">{{employee.first_name}}&nbsp;{{employee.last_name}}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{timestamp.id}}</td>
+                    <td>{{timestamp.timestamp_in}}</td>
+                    <td>{{timestamp.timestamp_out}}</td>
+                    <td>{{timestamp.duration}}</td>
+                    <td>
+                        <a href="{% url 'edit_timestamp' pk=timestamp.id %}" class="table-button">Edit</a>
+                        <a href="{% url 'delete_timestamp' pk=timestamp.id %}" class="table-button">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% empty %}
+                <p>No timestamps yet for today.</p>
+            {% endfor %}
+        </table>
+</div>
+
+{% endblock %}
